@@ -1,0 +1,22 @@
+.button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:active {
+  background-color: var(--color-primary-active);
+}
