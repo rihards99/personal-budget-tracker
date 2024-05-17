@@ -1,6 +1,6 @@
 import './matchMedia.mock'; // Must be imported before the tested file
 import '@testing-library/jest-dom'
-import { render, rerender, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Overview from '../components/Overview'
 
 const testExpense = [

@@ -76,8 +76,6 @@ export default function ExpenseTable({expenses, onDeleteExpense}: ExpenseTablePr
         </div>
       ),
       onFilter: (value, record) => {
-        console.log(value)
-
         const fromDateMatch = fromDate ? new Date(record.date) >= fromDate : true; 
         const toDateMatch = toDate ? new Date(record.date) <= toDate : true;
 

@@ -26,8 +26,6 @@ export async function POST(req : NextRequest) {
   }
 
   const expense = await req.json()
-  console.log("🚀 ~ SERVER expense:", expense);
-
   const newExpenses = await createExpense({...expense, user_id: user.id});
 
   return Response.json(newExpenses)
