@@ -47,13 +47,13 @@ export default function ExpenseTable({expenses, onDeleteExpense}: ExpenseTablePr
       title: 'Date',
       dataIndex: 'date',
       key: 'date',
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+      filterDropdown: ({ setSelectedKeys, confirm }) => (
         <div className={style.dateFilter}>
           <div>
             <span>From: </span>
             <DatePicker
               format="DD-MM-YYYY"
-              onChange={(date, dateString) => {
+              onChange={(date) => {
                 setFromDate(date ? date.toDate() : null);
                 setSelectedKeys([2, 1]); // just to trigger the filtering
                 confirm({closeDropdown: false});
@@ -66,7 +66,7 @@ export default function ExpenseTable({expenses, onDeleteExpense}: ExpenseTablePr
             <span> To: </span>
             <DatePicker
               format="DD-MM-YYYY"
-              onChange={(date, dateString) => {
+              onChange={(date) => {
                 setToDate(date ? date.toDate() : null);
                 setSelectedKeys([1, 2]); // just to trigger the filtering
                 confirm({closeDropdown: false});
@@ -129,7 +129,7 @@ export default function ExpenseTable({expenses, onDeleteExpense}: ExpenseTablePr
       title: '',
       key: 'action',
       render: (_, record) => (
-        <Button danger onClick={() => onDeleteClick(record)}>Delete</Button>
+        <Button data-testid="delete-button" danger onClick={() => onDeleteClick(record)}>Delete</Button>
       ),
     },
   ];

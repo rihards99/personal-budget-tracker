@@ -14,7 +14,7 @@ const DateFormItem = () => (
     name="date"
     rules={[{ required: true, message: 'Please input the date of the expense!' }]}
   >
-    <DatePicker format="DD/MM/YYYY" />
+    <DatePicker format="DD/MM/YYYY" data-testid="date-picker"/>
   </Form.Item>
 )
 
@@ -77,21 +77,30 @@ const AmountFormItem = () => (
 
 type CreateExpenseModalProps = {
   onCreateExpense: (values: Expense) => void;
+  values?: Expense; // for testing
 }
 
-export default function CreateExpenseModal({onCreateExpense}: CreateExpenseModalProps) {
+export default function CreateExpenseModal({onCreateExpense, values}: CreateExpenseModalProps) {
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (open) {
-      form.setFieldsValue({ user: "antd" });
+      // form.setFieldsValue({ user: "antd" });
+      form.setFieldsValue(values);
     }
-  }, [open, form]);
+  }, [open, form, values]);
 
   return (
     <>
-      <Button className={style.addButton} type='primary' onClick={() => setOpen(true)}>ADD ENTRY</Button>
+      <Button
+        className={style.addButton}
+        type='primary'
+        onClick={() => setOpen(true)}
+        data-testid="create-expense-button"
+      >
+        ADD ENTRY
+      </Button>
       <Modal
         title="Create a new entry"
         okText="Create"
@@ -101,10 +110,7 @@ export default function CreateExpenseModal({onCreateExpense}: CreateExpenseModal
         onOk={async () => {
           try {
             const values = await form?.validateFields();
-            console.log("🚀 ~ values:", values);
             form?.resetFields();
-
-            console.log("🚀 ~ values.date:", values.date);
             values.date = values.date.$d.toDateString();
             onCreateExpense(values);
             setOpen(false);
